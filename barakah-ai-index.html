@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Barakah AI — Websites, Chatbots, Automations & Analytics</title>
+  <meta name="description" content="Barakah AI is an agency that builds clean, fast websites with chatbots, automations, and analytics. Typical delivery: ~1 week." />
+  <meta name="theme-color" content="#E1164A" />
+
+  <!-- Open Graph (update og:image to your hosted path once deployed) -->
+  <meta property="og:title" content="Barakah AI — Websites, Chatbots, Automations & Analytics" />
+  <meta property="og:description" content="Websites built for speed and conversions, plus chatbots, automations, and analytics." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/infinity.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.82em%22 font-size=%2280%22>∞</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --raspberry:#E1164A; --raspberry-600:#C60F40;
+      --ink:#0E0E12; --muted:#666A73;
+      --paper:#FFFFFF; --paper-2:#FAFAFB; --stroke:#EFEFF2;
+      --shadow: 0 10px 30px rgba(225,22,74,.18);
+      --link:#0E0E12;
+    }
+    html[data-theme="dark"]{
+      --ink:#F2F3F6; --muted:#B6BAC5;
+      --paper:#0B0B0E; --paper-2:#101116; --stroke:#23232A; --link:#F2F3F6;
+      --shadow: 0 16px 40px rgba(225,22,74,.24);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+    img{max-width:100%;display:block}
+    .container{width:min(1140px,92%);margin-inline:auto}
+    .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .section{padding:84px 0}.section.alt{background:var(--paper-2)}
+    .section-head{text-align:center;margin-bottom:36px}
+    .section-head h2{font-size:clamp(28px,4vw,40px);margin:0}
+    .section-head p{color:var(--muted);margin-top:8px}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:12px 18px;font-weight:700;border:2px solid transparent;text-decoration:none;cursor:pointer}
+    .btn-primary{background:var(--raspberry);color:#fff;box-shadow:var(--shadow)} .btn-primary:hover{background:var(--raspberry-600)}
+    .btn-light{background:#fff;color:#0E0E12;border-color:var(--stroke)} html[data-theme="dark"] .btn-light{background:#14151B;color:#F2F3F6;border-color:#262832}
+    .btn-light:hover{border-color:#111}
+    .btn-ghost{background:transparent;color:var(--ink)}
+    .btn-outline{background:transparent;border-color:var(--raspberry);color:var(--raspberry)} .btn-outline:hover{background:var(--raspberry);color:#fff}
+
+    .pill{display:inline-block;border:1px solid var(--stroke);padding:6px 10px;border-radius:999px;font-size:.9rem;color:var(--muted)}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:18px 0;list-style:none}
+    .badges li{background:var(--paper-2);border:1px solid var(--stroke);padding:6px 10px;border-radius:999px}
+    .lead{font-size:1.125rem;color:var(--ink)}
+    .accent{color:var(--raspberry)}
+
+    /* Header */
+    .site-header{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid rgba(16,16,16,.06);z-index:1000}
+    html[data-theme="dark"] .site-header{background:rgba(11,11,14,.75);border-bottom:1px solid #1a1b22}
+    .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-weight:800}
+    .brand .mark{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--raspberry);color:#fff;font-weight:900}
+    .brand.small .mark{width:28px;height:28px}
+    .brand .brand-text strong{color:var(--raspberry)}
+    .nav{display:flex;gap:16px;align-items:center}
+    .nav a{color:var(--link);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:10px}
+    .nav a:hover{background:var(--paper-2)}
+    .nav-toggle{display:none;background:none;border:none;font-size:22px}
+    .right{display:flex;align-items:center;gap:10px}
+    .theme-toggle{border:1px solid var(--stroke);background:transparent;border-radius:12px;padding:8px 12px;font-weight:700;cursor:pointer}
+
+    /* Hero */
+    .hero{padding:96px 0 64px;background:linear-gradient(180deg,var(--paper), var(--paper) 55%, rgba(225,22,74,.06))}
+    html[data-theme="dark"] .hero{background:linear-gradient(180deg,var(--paper), var(--paper) 55%, rgba(225,22,74,.10))}
+    .hero-copy h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:0 0 10px}
+    .hero-art{display:grid;place-items:center}
+    .hero-img{border-radius:24px;border:1px solid var(--stroke);box-shadow:var(--shadow)}
+
+    /* Logos */
+    .logos{padding:22px 0 10px}
+    .logo-row{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:14px}
+    .logo{font-weight:800;color:#B0B4BD;border:1px dashed #E3E6ED;padding:8px 14px;border-radius:10px}
+    html[data-theme="dark"] .logo{color:#555a66;border-color:#2b2d37}
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .card{border:1px solid var(--stroke);background:var(--paper);border-radius:18px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
+    html[data-theme="dark"] .card{box-shadow:none}
+    .card h3{margin-top:0}
+    .list{margin:10px 0 0 0;padding:0 0 0 18px}
+    .card .thumb{width:100%;border-radius:12px;border:1px solid var(--stroke);margin:-4px 0 12px 0}
+
+    /* Portfolio */
+    .work{margin:0;border:1px solid var(--stroke);border-radius:18px;overflow:hidden;background:var(--paper);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    html[data-theme="dark"] .work{box-shadow:none}
+    .work img{display:block;width:100%;height:auto}
+    .work figcaption{padding:10px 14px;color:var(--muted)}
+    .work .meta{display:flex;gap:10px;padding:0 14px 14px}
+    .work .meta a{font-weight:700;text-decoration:none;color:var(--raspberry)}
+    .work .meta a:hover{text-decoration:underline}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+    .price-card{border:1.5px solid var(--stroke);border-radius:20px;padding:22px;background:var(--paper);display:flex;flex-direction:column;gap:12px}
+    .price-card .price{font-size:2rem;font-weight:800;margin:4px 0 0}
+    .price-card .sub{color:var(--muted);margin:0 0 8px}
+    .price-card .tag{align-self:flex-start;background:#0E0E12;color:#fff;border-radius:999px;padding:6px 10px;font-size:.8rem;margin-top:-6px}
+    html[data-theme="dark"] .price-card .tag{background:#1c1d25}
+    .price-card.featured{border-color:var(--raspberry);box-shadow:var(--shadow)}
+    .fineprint{color:var(--muted);text-align:center;margin-top:14px}
+
+    /* FAQ */
+    .faq details{border:1px solid var(--stroke);border-radius:14px;padding:12px 16px;background:var(--paper)}
+    .faq details+details{margin-top:12px}
+    .faq summary{cursor:pointer;font-weight:700}
+
+    /* Contact / Form */
+    .contact .form{border:1px solid var(--stroke);border-radius:18px;padding:18px;background:var(--paper)}
+    label{display:grid;gap:8px;margin-bottom:12px}
+    input,select,textarea{width:100%;padding:12px 12px;border:1.5px solid #D6DAE4;border-radius:12px;background:#fff;font:inherit;outline:none;transition:border .2s, box-shadow .2s}
+    html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:#14151B;border-color:#262832;color:#F2F3F6}
+    input:focus,select:focus,textarea:focus{border-color:var(--raspberry);box-shadow:0 0 0 4px rgba(225,22,74,.12)}
+    .form .cta{display:flex;gap:10px;align-items:center;margin-top:6px}
+    .form-note{color:var(--muted)}
+    .tiny{font-size:.9rem;color:var(--muted)}
+
+    /* Footer */
+    .footer{background:linear-gradient(180deg,#0E0E12,#0E0E12);color:#EDEEF2;margin-top:64px;padding-top:28px}
+    html[data-theme="dark"] .footer{background:linear-gradient(180deg,#09090c,#09090c)}
+    .footer .brand .mark{background:#fff;color:#0E0E12}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;padding:18px 0}
+    .foot-links{display:grid;gap:6px}
+    .foot-links a{color:#EDEEF2;text-decoration:none}
+    .foot-links a:hover{text-decoration:underline}
+    .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:14px 0}
+
+    /* Back to top */
+    .back-to-top{position:fixed;right:20px;bottom:20px;display:inline-grid;place-items:center;width:42px;height:42px;border-radius:999px;background:var(--raspberry);color:#fff;text-decoration:none;box-shadow:var(--shadow);opacity:.9}
+    .back-to-top:hover{opacity:1}
+
+    /* Reveal animations */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .grid-2{grid-template-columns:1fr}
+      .grid-3,.cards,.pricing{grid-template-columns:1fr}
+      .nav-toggle{display:inline-block}
+      .nav{position:absolute;right:4%;top:68px;background:var(--paper);border:1px solid var(--stroke);border-radius:14px;padding:8px 8px;display:none;flex-direction:column;min-width:220px}
+      .nav a{padding:10px 12px}
+      .nav.show{display:flex}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}.reveal{transition:none}
+    }
+
+    /* Inline status toast */
+    .toast {
+      position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
+      background: var(--paper); border:1px solid var(--stroke); color: var(--ink);
+      padding: 10px 14px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      display:none; z-index: 10000;
+    }
+    .toast.show { display:block; }
+    .toast.success { border-color: #2ecc71; }
+    .toast.error { border-color: #e74c3c; }
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header class="site-header" data-elevate>
+    <div class="container nav-wrap">
+      <a href="#" class="brand" aria-label="Barakah AI Home">
+        <span class="mark">∞</span>
+        <span class="brand-text">Barakah <strong>AI</strong></span>
+      </a>
+
+      <div class="right">
+        <button class="theme-toggle" id="themeBtn" aria-label="Toggle dark mode">🌙 Dark</button>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+
+      <nav id="nav" class="nav">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-light">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container grid-2">
+      <div class="hero-copy">
+        <h1 class="reveal">Websites, AI Chatbots & Automations<br><span class="accent">Agency buildouts in ~1 week</span></h1>
+        <p class="lead reveal delay-1">
+          I build clean, fast websites for growth—then wire in <strong>chatbots</strong>, <strong>business automations</strong>, and <strong>analytics</strong>.
+        </p>
+        <div class="cta reveal delay-2">
+          <a href="#contact" class="btn btn-primary">Start My Project</a>
+          <a href="#portfolio" class="btn btn-ghost">See Work</a>
+        </div>
+        <ul class="badges reveal delay-3" aria-label="Key benefits">
+          <li>🤖 Chatbots (FAQ/lead generation)</li>
+          <li>🔌 Automations (CRM/Sheets)</li>
+          <li>📈 Data-Driven Analytics & SEO</li>
+          <li>⚡ Fast, mobile‑first</li>
+        </ul>
+      </div>
+
+      <!-- Hero image from local assets -->
+      <div class="hero-art reveal delay-2">
+        <img class="hero-img" alt="Infinity tech theme" src="assets/infinity.jpg" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Logos -->
+  <section class="logos" aria-label="As seen with">
+    <div class="container">
+      <span class="pill">Trusted by ambitious founders</span>
+      <div class="logo-row">
+        <span class="logo">Startup</span>
+        <span class="logo">Retail</span>
+        <span class="logo">Education</span>
+        <span class="logo">Halal Restaurants</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <header class="section-head reveal">
+        <h2>What I Deliver</h2>
+        <p>Agency‑grade builds, automation‑ready, analytics‑enabled.</p>
+      </header>
+
+      <div class="cards">
+        <article class="card reveal">
+          <img class="thumb" src="assets/website.jpg" alt="Modern responsive website design on laptop screen" loading="lazy" decoding="async">
+          <h3>Websites</h3>
+          <p>Landing pages and multi‑page sites built for clarity, speed, and conversions. Accessible, SEO‑friendly, and mobile‑first.</p>
+          <ul class="list">
+            <li>Design system & copy polish</li>
+            <li>On‑page SEO & performance</li>
+            <li>WCAG‑friendly practices.</li>
+          </ul>
+        </article>
+
+        <article class="card reveal delay-1">
+          <img class="thumb" src="assets/agent.jpg" alt="AI chatbot interface on a smartphone" loading="lazy" decoding="async">
+          <h3>Chatbots</h3>
+          <p>Lead‑qualifying chatbots (FAQ or form‑handoff) connected to WhatsApp or email pipelines.</p>
+          <ul class="list">
+            <li>Click‑to‑WhatsApp capture</li>
+            <li>FAQ & lead triage</li>
+            <li>Booking/calendar hooks</li>
+          </ul>
+        </article>
+
+        <article class="card reveal delay-2">
+          <img class="thumb" src="assets/automation.jpg" alt="Data analytics dashboard and automation workflow" loading="lazy" decoding="async">
+          <h3>Automations & Analytics</h3>
+          <p>Automate repetitive tasks and keep your data tidy with dashboards you can act on.</p>
+          <ul class="list">
+            <li>Forms → Google Sheets/CRM</li>
+            <li>Event tracking & tags</li>
+            <li>Reports & insights</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="section alt" id="portfolio">
+    <div class="container">
+      <header class="section-head reveal">
+        <h2>Recent Work</h2>
+        <p>Real projects demonstrating speed, polish, and useful automation.</p>
+      </header>
+
+      <div class="grid-3">
+        <!-- Future Grads -->
+        <figure class="work reveal">
+          <img src="assets/futuregrads.png" alt="Future Grads website preview" loading="lazy" decoding="async">
+          <figcaption><strong>Future Grads International Academy</strong> — modern, mobile‑first school site with WhatsApp + Google Sheets inquiry flow.</figcaption>
+          <div class="meta">
+            <a href="https://akmalnimaladasa.github.io/futuregrads-websiteV4/" target="_blank" rel="noopener">Visit site →</a>
+          </div>
+        </figure>
+
+        <!-- Gratitude Journal -->
+        <figure class="work reveal delay-1">
+          <img src="assets/gratitude-journal.png" alt="Gratitude Journal web app" loading="lazy" decoding="async">
+          <figcaption><strong>Gratitude Journal</strong> — a super‑simple web app focused on daily reflection and positivity.</figcaption>
+          <div class="meta">
+            <a href="https://akmalnimaladasa.github.io/first-gratitude-journal/" target="_blank" rel="noopener">Open app →</a>
+          </div>
+        </figure>
+
+        <!-- Data Project -->
+        <figure class="work reveal delay-2">
+          <img src="assets/dataproject.png" alt="Data project dashboard preview" loading="lazy" decoding="async">
+          <figcaption><strong>Data Project</strong> — analytics‑ready data pipeline and dashboard prototype demonstrating event tracking and reporting.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <header class="section-head reveal">
+        <h2>Transparent Pricing</h2>
+        <p>Quality builds, clear scope, on a one‑week timeline.</p>
+      </header>
+
+      <div class="pricing">
+        <div class="price-card reveal">
+          <h3>Starter</h3>
+          <p class="price">LKR 35,000</p>
+          <p class="sub">or USD 120</p>
+          <ul class="list">
+            <li>1‑page landing</li>
+            <li>Google Maps</li>
+            <li>WhatsApp lead button</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Start</a>
+        </div>
+
+        <div class="price-card featured reveal delay-1" aria-label="Most popular">
+          <span class="tag">Most Popular</span>
+          <h3>Growth</h3>
+          <p class="price">LKR 60,000</p>
+          <p class="sub">or USD 200</p>
+          <ul class="list">
+            <li>Everything in Starter</li>
+            <li>Up to 5 pages</li>
+            <li>Chatbot (FAQ/lead)</li>
+            <li>Automation to Google Sheets/CRM</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Choose Growth</a>
+        </div>
+
+        <div class="price-card reveal delay-2">
+          <h3>Pro</h3>
+          <p class="price">LKR 85,000</p>
+          <p class="sub">or USD 282</p>
+          <ul class="list">
+            <li>Everything in Growth</li>
+            <li>Custom design system</li>
+            <li>Advanced automations</li>
+            <li>Analytics dashboard</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Go Pro</a>
+        </div>
+      </div>
+      <p class="fineprint reveal">* Typical delivery is ~1 week after content is received. Complex features may add time.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt" id="faq">
+    <div class="container">
+      <header class="section-head reveal">
+        <h2>FAQ</h2>
+        <p>Quick answers to common questions.</p>
+      </header>
+
+      <div class="faq">
+        <details class="reveal">
+          <summary>Do you write content and source images?</summary>
+          <p>Yes — I draft starter copy and source quality stock images. If you have brand assets, I’ll match them.</p>
+        </details>
+        <details class="reveal delay-1">
+          <summary>What about hosting & domains?</summary>
+          <p>I’ll set up your deploy on GitHub Pages, Netlify, or Vercel (your choice). You own all accounts and domains.</p>
+        </details>
+        <details class="reveal delay-2">
+          <summary>Islamic compliance?</summary>
+          <p>Transparent, ethical work. No riba‑based financing or haram industries.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <header class="section-head reveal">
+        <h2>Start Your Project</h2>
+        <p>Tell me a few details — I’ll reply within hours.</p>
+      </header>
+
+      <form id="quoteForm" class="form reveal" novalidate>
+        <!-- Honeypot (spam trap) -->
+        <input type="text" name="website" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" tabindex="-1" aria-hidden="true">
+
+        <div class="grid-2">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" required placeholder="Your full name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+        </div>
+
+        <label>
+          <span>WhatsApp (with country code)</span>
+          <input type="tel" name="phone" required placeholder="+94 775 120 885" inputmode="tel" />
+          <span class="tiny">Example: +94775120885</span>
+        </label>
+
+        <label>
+          <span>Business / Brand</span>
+          <input type="text" name="brand" required placeholder="Company or project name" />
+        </label>
+
+        <label>
+          <span>What do you need?</span>
+          <select name="service" required>
+            <option value="" selected disabled>Select a service</option>
+            <option>Website (~1 week)</option>
+            <option>Chatbot + WhatsApp Leads</option>
+            <option>Automations & Analytics</option>
+            <option>Full Package</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="4" placeholder="Share goals, examples you like, timeline…"></textarea>
+        </label>
+
+        <div class="cta">
+          <button type="submit" class="btn btn-primary">Request Quote</button>
+          <a class="btn btn-ghost" id="whatsappLink" target="_blank" rel="noopener">Message on WhatsApp</a>
+        </div>
+
+        <p class="form-note">Or email: <a href="mailto:akmal.yasaz@gmail.com">akmal.yasaz@gmail.com</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#" class="brand small"><span class="mark">∞</span><span class="brand-text">Barakah <strong>AI</strong></span></a>
+        <p>Websites, chatbots, automations, and analytics — shipped with care.</p>
+      </div>
+      <div class="foot-links">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-cta">
+        <a href="#contact" class="btn btn-light">Get Started</a>
+        <p class="tiny">WhatsApp: <a href="https://wa.me/94775120885" target="_blank" rel="noopener">+94 775 120 885</a></p>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <small>© <span id="year"></span> Barakah AI. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <a href="#home" class="back-to-top" aria-label="Back to top">↑</a>
+
+  <script>
+    // ========= CONFIG (your live Google Apps Script Web App) =========
+    const SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx-p_r7Qi8Vg5VFtpbyRd6CLJ2z60pbbnuBWvgjz9PDiPAbtM5ATnqxByOnqUwwOtv9nw/exec";
+    // =================================================================
+
+    // Sticky header elevation
+    const header = document.querySelector('[data-elevate]');
+    addEventListener('scroll', () => {
+      header.style.boxShadow = (scrollY || 0) > 6 ? '0 8px 24px rgba(0,0,0,.06)' : 'none';
+    });
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('nav');
+    navToggle?.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('show');
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('show'); });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // UI helpers
+    const toast = document.getElementById('toast');
+    function showToast(msg, type='success'){
+      toast.textContent = msg;
+      toast.className = `toast show ${type}`;
+      setTimeout(()=> toast.className = 'toast', 3000);
+    }
+
+    // Contact form: validate + WhatsApp deep link + Sheets submit
+    const form = document.getElementById('quoteForm');
+    const whatsappLink = document.getElementById('whatsappLink');
+    const WA_PHONE = '94775120885';
+
+    const getData = () => {
+      const fd = new FormData(form);
+      const obj = Object.fromEntries(fd.entries());
+      for (const k in obj) if (typeof obj[k] === 'string') obj[k] = obj[k].trim();
+      return obj;
+    };
+
+    function buildMessage(d){
+      return [
+        'Hello from a Barakah AI lead ✨',
+        `Name: ${d.name}`,
+        `Email: ${d.email}`,
+        `Phone: ${d.phone}`,
+        `Brand: ${d.brand}`,
+        `Service: ${d.service}`,
+        `Message: ${d.message || '-'}`,
+      ].join('\n');
+    }
+
+    function updateWA(){
+      if (!form) return;
+      const d = getData();
+      const url = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(buildMessage({
+        name: d.name || '(Your name)',
+        email: d.email || '(Your email)',
+        phone: d.phone || '(Your phone)',
+        brand: d.brand || '(Your brand)',
+        service: d.service || '(Service)',
+        message: d.message || ''
+      }))}`;
+      whatsappLink?.setAttribute('href', url);
+    }
+    form?.addEventListener('input', updateWA);
+    updateWA();
+
+    async function sendToSheets(payload){
+      if (!SHEETS_WEB_APP_URL.startsWith('https://script.google.com')) return { ok:false, error:'Sheets endpoint not set' };
+      try{
+        const res = await fetch(SHEETS_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors', // open endpoint; response will be opaque
+          headers: { 'Content-Type':'application/json' },
+          body: JSON.stringify(payload)
+        });
+        // Opaque response -> assume success
+        return { ok:true };
+      }catch(err){
+        return { ok:false, error:String(err) };
+      }
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const d = getData();
+
+      // honeypot
+      if (d.website) { showToast('Blocked as spam.', 'error'); return; }
+
+      const required = ['name','email','phone','brand','service'];
+      const missing = required.filter(k => !String(d[k] || '').trim());
+      if (missing.length){ alert('Please fill all required fields.'); return; }
+
+      // EMAIL: use native HTML5 validity (fixes false invalid email)
+      const emailField = form.querySelector('input[name="email"]');
+      if (!emailField.checkValidity()){
+        emailField.reportValidity();
+        return;
+      }
+
+      // 1) Send to Google Sheets (async)
+      const payload = { ...d, submittedAt: new Date().toISOString(), source: location.href };
+      const sheetsResult = await sendToSheets(payload);
+      if (sheetsResult.ok) showToast('Saved to Google Sheets ✅', 'success');
+      else showToast('Could not save to Sheets (still sending via WhatsApp/email).', 'error');
+
+      // 2) Open WhatsApp lead thread
+      if (whatsappLink?.href) window.open(whatsappLink.href, '_blank', 'noopener');
+
+      // 3) Email fallback
+      const subject = `Quote Request — ${d.brand}`;
+      const body = buildMessage(d);
+      const mailto = `mailto:akmal.yasaz@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setTimeout(() => { window.location.href = mailto; }, 600);
+    });
+
+    // THEME: matte black × raspberry red (toggle + remember) — default dark
+    const themeBtn = document.getElementById('themeBtn');
+    const storedTheme = localStorage.getItem('barakah-theme');
+    if (storedTheme) {
+      document.documentElement.setAttribute('data-theme', storedTheme);
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    const setBtn = () => themeBtn.textContent =
+      (document.documentElement.getAttribute('data-theme') === 'dark') ? '☀️ Light' : '🌙 Dark';
+    setBtn();
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('barakah-theme', next);
+      setBtn();
+    });
+  </script>
+</body>
+</html>
